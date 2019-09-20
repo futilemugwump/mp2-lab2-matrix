@@ -24,7 +24,8 @@ protected:
   int Size;       // размер вектора
   int StartIndex; // индекс первого элемента вектора
 public:
-  TVector(int s = 10, int si = 0);
+  TVector(int s = 10, int si = 0)
+	  ;
   TVector(const TVector &v);                // конструктор копирования
   ~TVector();
   int GetSize()      { return Size;       } // размер вектора
@@ -57,6 +58,15 @@ public:
       out << v.pVector[i] << ' ';
     return out;
   }
+  template <class Valtype> // конструктор копирования
+  TMatrix<Valtype>::TMatrix(const TMatrix<Valtype>& mt) :
+	  TVector<TVector<ValType> >(mt) {}
+
+  template <class ValType> // конструктор преобразования типа
+  TMatrix<Valtype>::TMatrix(const TVector<TVector<ValType> >& mt) :
+	  TVector<TVector<ValType> >(mt) {}
+
+
 };
 
 template <class ValType>
@@ -131,7 +141,21 @@ template <class ValType>
 class TMatrix : public TVector<TVector<ValType> >
 {
 public:
-  TMatrix(int s = 10);                           
+  TMatrix(int s = 10)
+	  TMatrix(int _size)
+  {
+
+
+	  size = _size;
+	  matr = new TVector<Valtype>[size];
+	  for (int i = 0; i < size; i++)
+	  {
+		  TVector<ValType> temp[size = i]
+		  matr[i] = temp;
+	  }
+
+  }
+  ;
   TMatrix(const TMatrix &mt);                    // копирование
   TMatrix(const TVector<TVector<ValType> > &mt); // преобразование типа
   bool operator==(const TMatrix &mt) const;      // сравнение
